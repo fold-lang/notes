@@ -60,10 +60,10 @@ Is translated during parsing to:
 (= (def x) (2 + 2))
 ```
 
-The BNF definition of the grammar is:
+Here is the grammar of the canonical syntax:
 
 ```
-expression ::= atom | form | (expression)
+expr ::= atom | form | (expr)
+form ::= expr form
 atom ::= ID | INT | FLOAT | BOOL | CHAR | STRING
-form ::= expression form
 ```
