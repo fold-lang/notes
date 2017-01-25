@@ -59,3 +59,11 @@ Is translated during parsing to:
 ```scala
 (= (def x) (2 + 2))
 ```
+
+The BNF definition of the grammar is:
+
+```
+expression ::= atom | form | (expression)
+atom ::= ID | INT | FLOAT | BOOL | CHAR | STRING
+form ::= expression form
+```
