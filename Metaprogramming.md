@@ -10,7 +10,7 @@ This document explores the metaprogramming mechanisms present in Fold and discus
 - Introspection
 
 
-## Use cases
+## Motivation
 
 Before starting the definition of the metaprogramming mechanisms in Fold, the main use cases will be studied. In which situations metaprogramming is useful and why?
 
