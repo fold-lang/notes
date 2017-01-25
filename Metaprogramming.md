@@ -41,7 +41,7 @@ The macrosystem for Fold should be simple and elementary providing building bloc
 
 ## Implementation
 
-The fundamental idea behind Lisp is its uniform syntax that works as a primitive material for building complex abstractions. Fold appears to have a regular grammar at first sight, but just underneath every syntactic construct it hides a _canonical syntax_, which gives it full freedom to extend and adapt the language.
+The fundamental idea behind Lisp is its uniform syntax that works as a primitive material for building complex abstractions. Fold appears to have a regular grammar at first sight, but just underneath every syntactic construct hides a _canonical syntax_, which gives it full freedom to extend and adapt the language.
 
 
 ### Canonical Syntax
