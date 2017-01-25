@@ -1,6 +1,6 @@
 # Metaprogramming
 
-This document explores some metaprogramming mechanisms and discusses their integration in Fold.
+This document explores the metaprogramming mechanisms present in Fold and discusses their implementation details.
 
 ## Approaches
 
