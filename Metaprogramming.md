@@ -57,6 +57,14 @@ macro
   | "[" "]" -> List.empty
   | "[" (x::Expr) (xs::("," Expr)*) "]" -> List.prepend x xs
 end
+
+macro vec
+  | $x::Expr "," * ->
+    let temp_vec = Vec::new() in
+    $(
+      temp_vec.push($x);
+    )*
+    temp_vec
 ```
 
 ```
