@@ -20,6 +20,53 @@ Before starting the definition of the metaprogramming mechanisms in Fold, the ma
 - **Multi-stage, generative programming**: enables the generation of specialised expanded code that avoids the general run-time overhead.
 - **Introspection**: used to inspect code or type information at compile-time for better decisions in other use cases. Ex: pattern match on a expression; specialise code for different input types; add attributes to all functions in a module (_e.g._ for tracing).
 
+### Language Extensions
+
+Fold is language implemented as a library. The compiler has a set of basic parsing rules (described in the section about [Canonical Syntax](#canonical-syntax)) and can be extended with macros.
+
+
+```
+macro if t then: a else: b =
+  match t
+  | True -> a
+  | False -> b
+  end
+```
+
+List literals are also defined with macros. Consider the following grammar definition:
+
+```
+list  = "[" "]" | items
+items = expr | expr "," items
+```
+
+The same grammar can be defined in the parser combinator style:
+
+```
+list = char '[' >> char ']' <|> char '[' >> items >> char ']'
+items = do
+  x  <- expr
+  xs <- many (char ',' >> expr)
+  return [x & xs]
+```
+
+```
+list = "[" "]" | expr ("," expr)*
+
+macro
+  | "[" "]" -> List.empty
+  | "[" (x::Expr) (xs::("," Expr)*) "]" -> List.prepend x xs
+end
+```
+
+```
+syntax
+  | `[ `] = List.empty
+  | `[ list_items `]
+  
+def list_items 
+```
+
 
 ### Rewrite Rules, Stream Fusion and Deforestation
 
@@ -63,7 +110,22 @@ Is translated during parsing to:
 Here is the grammar of the canonical syntax:
 
 ```
-expr ::= atom | form | (expr)
-form ::= expr form
-atom ::= ID | INT | FLOAT | BOOL | CHAR | STRING
+expr = atom | form | (expr)
+form = expr form
+atom = ID | INT | FLOAT | BOOL | CHAR | STRING
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
