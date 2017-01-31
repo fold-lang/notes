@@ -872,3 +872,20 @@ def 0! = 1
 ```
 
 The second example is only possible with full function + pattern syntax.
+
+
+## Jan 31 2017
+
+Function application syntax in Fold follows the tradition started by the functional programming languages such as Lisp and Haskell: arguments are passed to functions by juxtaposition. This is different from the familiar mathematical notation _`f(x)`_ adopted by most programming languages.
+
+The advantages of space separated argument application are:
+
+- **Cleaner syntax**: this minimalistic approach results in code that many functional programmers consider elegant.
+- **Easier metaprogramming**: the fundametnal part of the metaprogramming model in Lisp is the representation of lists in Lisp. Function application is just a special case of list literals in Lisp. This duality is an important design decision that ensures flexibility and consistenncy to the Lisp programms.
+- **Explicit currying**: In Haskell the usage of juxtaposition for application is mainly motivated by the underlying function model in which all functions are only passed one argument. So a function call `f x y z` in reality is treated as `((f x) y) z`.
+
+
+The disadvantages of the juxtaposition for application are:
+
+- **Unfamiliar to beginers**: people starting with functional languages usually find this syntax strange. It is understandable since even the regular _`f(x)`_ notation is used in math.
+- **Parentheses handling**: the regular syntax always forces the programmer to use the parenthese. It is consistent and pepole don't think about it. With functional syntax you only need parentheses if your argument is a compound expressions. In some situations it may be inconvenient to keep track of the parentheses and match them while writing nested applications. Haskell programmers use the `$` operator to avoid writing parentheses. In OCaml it is less frequent but pepole may use `@@` for the same reason.
