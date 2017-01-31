@@ -876,7 +876,7 @@ The second example is only possible with full function + pattern syntax.
 
 ## Jan 31 2017
 
-Function application syntax in Fold follows the tradition started by the functional programming languages such as Lisp and Haskell: arguments are passed to functions by juxtaposition. This is different from the familiar mathematical notation _`f(x)`_ adopted by most programming languages.
+Function application syntax in Fold follows the tradition started by the functional programming languages such as Lisp and Haskell: arguments are passed to functions by juxtaposition. This is different from the familiar mathematical notation `f(x)` adopted by most programming languages.
 
 The advantages of space separated argument application are:
 
@@ -887,5 +887,18 @@ The advantages of space separated argument application are:
 
 The disadvantages of the juxtaposition for application are:
 
-- **Unfamiliar to beginers**: people starting with functional languages usually find this syntax strange. It is understandable since even the regular _`f(x)`_ notation is used in math.
+- **Unfamiliar to beginers**: people starting with functional languages usually find this syntax strange. It is understandable since even the regular `f(x)` notation is used in math.
 - **Parentheses handling**: the regular syntax always forces the programmer to use the parenthese. It is consistent and pepole don't think about it. With functional syntax you only need parentheses if your argument is a compound expressions. In some situations it may be inconvenient to keep track of the parentheses and match them while writing nested applications. Haskell programmers use the `$` operator to avoid writing parentheses. In OCaml it is less frequent but pepole may use `@@` for the same reason.
+
+In Fold there will be no `$` operator. The equivalent of `$` is the `<|` operator which is consistent with `|>` but verbose and less natural for regular function application.
+
+The proposal is to use a simplified math notation: `f x, y, z`. This version of the syntax will be familiar to many developers (languages like Ruby and Elixir already use it). The parentheses handling issue is also avoided by using commas.
+
+Another benefit of this syntax is the possibility to use a simpler notation for function definition:
+
+```
+
+hello : String -> ()
+hello name =
+  print "Hello, $name!"
+```
