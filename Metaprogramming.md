@@ -90,9 +90,53 @@ macro vec
 syntax
   | `[ `] = List.empty
   | `[ list_items `]
-
-def list_items
+fun list_items
 ```
+
+#### PEG
+
+One possible model for macro definition is the Parsing Expression Grammar:
+
+```
+An atomic parsing expression consists of:
+- any terminal symbol,
+- any nonterminal symbol, or
+- the empty string ε.
+
+Given any existing parsing expressions e, e1, and e2, a new parsing expression can be constructed using the following operators:
+- Sequence: e1 e2
+- Ordered choice: e1 / e2
+- Zero-or-more: e*
+- One-or-more: e+
+- Optional: e?
+- And-predicate: &e
+- Not-predicate: !e
+```
+
+The macro rules could be defined with:
+
+```
+e1   e2
+e1 | e2
+e+
+e*
+e?
+```
+
+With this notation the list definition would look like:
+
+```
+
+XXX: Write a raw pratt parser for lists first.
+macro items = expr ("," expr)*
+
+macro
+	| "[" "]" = quote List.empty
+	| "[" items "]" = quote items
+end
+
+```
+
 
 
 ### Rewrite Rules, Stream Fusion and Deforestation
