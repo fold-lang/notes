@@ -4,7 +4,21 @@ Parsing combinators are implemented in popular functional libraries for flexible
 
 ---
 
+```
+val items =
+  Parser.do
+    let x  <- expr,
+        xs <- many (char ',' >> expr)
+    in
+      return [x & xs]
+  end
 
+val list =
+  Parser.do
+    char '[' >> char ']' <|>
+    char '[' >> items << char ']'
+  end
+```
 
 
 ```
