@@ -22,6 +22,35 @@ val list =
 
 
 ```
+list  <- "[" "]" / "[" items "]" 
+items <- expr ("," expr)*
+```
+
+```
+XXX: LITERALS ARE VALID PATTERNS, but not types... :(
+XXX: Constructors can be operators (eg ::)
+macro (x :: expression) (xs :: ((char ",") expression)*)
+end
+
+
+type Rule =
+  | Empty
+  | Token String
+  | Sequence Rule Rule
+  | Alternative Rule Rule
+  | Many Rule
+  | Many1 Rule
+  | Optional Rule
+  | AndPred Rule
+  | NotPred Rule
+
+
+```
+
+---
+
+
+```
 An atomic parsing expression consists of:
 - any terminal symbol,
 - any nonterminal symbol, or
