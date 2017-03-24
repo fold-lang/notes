@@ -109,44 +109,44 @@ How should be parsed a function application expression with a newline?
 
 Regular function application:
 
--> sum 2 3
- = (sum 2 3)
+	-> sum 2 3
+	 = (sum 2 3)
 
 Prefix function application with a new-line in the middle:
 
--> sum 2
-       3
- = (sum 2 3)
- = (do (sum 2) 3)
+	-> sum 2
+	       3
+	 = (sum 2 3)
+	 = (do (sum 2) 3)
 
 Infix function application with a new-line in the middle:
 
--> 2
-   + 3
- = (+ 2 3)
- = (do 2 (+ 3))
+	-> 2
+	   + 3
+	 = (+ 2 3)
+	 = (do 2 (+ 3))
 
--> 2 +
-   3
- = (+ 2 3)
- = (do (+ 2) 3)
+	-> 2 +
+	   3
+	 = (+ 2 3)
+	 = (do (+ 2) 3)
 
--> map (x -> x + 1)
-   [1, 2, 3]
- = (map (lambda [x] (+ x 1) [1, 2, 3])
- = (do (map (lambda [x] (+ x 1)) [1, 2, 3]))
+	-> map (x -> x + 1)
+	   [1, 2, 3]
+	 = (map (lambda [x] (+ x 1) [1, 2, 3])
+	 = (do (map (lambda [x] (+ x 1)) [1, 2, 3]))
 
--> if (a > 3) then:
-       print "hey"
-       "yes"
-   else:
-       2 + 2
-       "no"
+	-> if (a > 3) then:
+	       print "hey"
+	       "yes"
+	   else:
+	       2 + 2
+	       "no"
 
--> get "/main":
-       print "Main view"
-       m = load_model "main"
-       render main_view model: m
+	-> get "/main":
+	       print "Main view"
+	       m = load_model "main"
+	       render main_view model: m
 
 
 ### How other languages solve this problem?
@@ -161,32 +161,33 @@ In Go, there is a basic rule:  “if the newline comes after a token that could 
 
 Forms:
 
--> f a b c d
--> - a b c d
+	-> f a b c d
+	-> - a b c d
 
 The prefix minus operator requires an argument:
--> - x
+
+	-> - x
 
 If `f` is a prefix function, then `f`, depending on the following tokens, may be treated both, as a literal and as a prefix function.
 
 Consider the following situations, where f and g are functions, x and y are literals and (>>) and (+) are infix operators:
 
--> f
- = (name f)
--> x
- = (name x)
--> x + y
- = ()
--> f >> g
- = (apply (>>) [f g])
--> f x y
- = (apply f [x y])
--> f g x
- = (apply f [g h])
--> f (>>) x
- = (apply f [(>>) x])
+	-> f
+	 = (name f)
+	-> x
+	 = (name x)
+	-> x + y
+	 = ()
+	-> f >> g
+	 = (apply (>>) [f g])
+	-> f x y
+	 = (apply f [x y])
+	-> f g x
+	 = (apply f [g h])
+	-> f (>>) x
+	 = (apply f [(>>) x])
 
-x y z])
+	x y z])
 
 
 The main difference is the handler used for the token after `f`, where `>>` is a prefix operator (led) and x is just a literal (nud).
@@ -196,26 +197,26 @@ After a symbol token is
 
 Any expression may be used as a prefix expression.
 
--> (x + y)  z
- = (apply (+) [x y])
+	-> (x + y)  z
+	 = (apply (+) [x y])
 
 
--> (a > 3) ? "yes" : "no"
+	-> (a > 3) ? "yes" : "no"
 
 
 All the function applications are parsed the same way as the following expression with multiple prefix minus optriangle a b c))))
 
--> f x y z
- = (f (x (y (z))))
+	-> f x y z
+	 = (f (x (y (z))))
 
 Alternatively the previous expression may be parsed as:
 
--> f x y z
- = (f [x y z])
+	-> f x y z
+	 = (f [x y z])
 
 
--> f x y z + g
- = (f [x y z])
+	-> f x y z + g
+	 = (f [x y z])
 
 
 
@@ -224,24 +225,24 @@ Alternatively the previous expression may be parsed as:
 
 ## Jan 8, 2015 – Lambda Functions
 
--> \ x y -> x + y
--> \ 5
--> !(~ + ~)
+	-> \ x y -> x + y
+	-> \ 5
+	-> !(~ + ~)
 
--> map !(+ 2) [ ... ]
+	-> map !(+ 2) [ ... ]
 
 
 - A function may have distinct polymorphic implementations, called methods.
 
--> print
+	-> print
 
 
 ## 11 Jan, 2015
 
 How the following expressions should be parsed:
 
--> let f a b = a + b in: f 3 2 - 1
- = 4
+	-> let f a b = a + b in: f 3 2 - 1
+	 = 4
 
 
 
