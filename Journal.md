@@ -273,17 +273,17 @@ The regular form of a macro term is defined as a head, referencing a symbol, and
 - The expression block definition syntax with `:` for body introduction will not be used. It is inconsistent with type definitions, and is not adequate for function definitions.
 
 
-type Person = { name :: String, age :: Int }
-function sum x y = x + y
-interface Comparable[a] = ...
-module Comparable[int] = ...
+	type Person = { name :: String, age :: Int }
+	function sum x y = x + y
+	interface Comparable[a] = ...
+	module Comparable[int] = ...
 
 not:
 
-type Person: { name :: String, age :: Int }
-function sum x y: x + y
-interface Comparable[a]: ...
-module Comparable[int]: ...
+	type Person: { name :: String, age :: Int }
+	function sum x y: x + y
+	interface Comparable[a]: ...
+	module Comparable[int]: ...
 
 
 ## 19 Feb, 2015
@@ -295,7 +295,7 @@ module Comparable[int]: ...
 
 Define the `Code` type, which extends `Expr` with types.
 
-`(5 + 2) :: Code Int = (`+, [`5, `2])
+	`(5 + 2) :: Code Int = (`+, [`5, `2])
 
 - Study the type inference system of OCaml.
 - Study the MetaOcaml code to see how it works.
