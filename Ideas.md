@@ -26,42 +26,42 @@ Mathematicas evaluation of unknown functions and values: f x. Symbolic applicati
 
 ---
 
-    Average ← {(+/ ω) ÷ ρ ω}
+From APL to Fold:
 
+```elm
+avg ← {(+/ ω) ÷ ρ ω}
+val avg = {(+/ ω) ÷ ρ ω}
+val avg = ω -> (+/ ω) ÷ ρ ω
+val avg = xs -> (+/ xs) ÷ ρ xs
+val avg = xs -> (+/ xs) / ρ xs
+val avg = xs -> (+/ xs) / # xs
+val avg = xs -> (+/ xs) / # xs
+val avg = xs -> (reduce (+) xs) / # xs
+```
 
+More examples:
 
-    Average =
-       xs -> +/ xs / # xs
+```elm
+-> ^4
+:: [Int] = [1, 2, 3, 4]
 
+-> ^4 \ 3
+:: [Int] = [1, 2, 4]
 
-    +/[1,2,3,4]
+-> ^5 \ [1, 4]
+:: [Int] = [2, 3, 5]
 
-    1+2+3+4
+-> ^5 \ [2..4]
+:: [Int] = [1, 5]
 
+-> 3 in ^5
+:: Bool = T
 
-
-
-    Average = xs -> fold (+) xs / # xs
-
-    -> ^4
-    :: [Int] = [1, 2, 3, 4]
-
-    -> ^4 \ 3
-    :: [Int] = [1, 2, 4]
-
-    -> ^5 \ [1, 4]
-    :: [Int] = [2, 3, 5]
-
-    -> ^5 \ [2..4]
-    :: [Int] = [1, 5]
-
-    -> 3 in ^5
-    :: Bool = T
-
-    -> A = [1, 2, 3, 4, 5]
-    -> B = [1, 5, 4, 7, 2]
-    -> fold (in B), ^(#A)
-    :: [Int] = [1, 5, 3, 2
+-> A = [1, 2, 3, 4, 5]
+-> B = [1, 5, 4, 7, 2]
+-> fold (in B), ^(#A)
+:: [Int] = [1, 5, 3, 2
+```
 
 - The real flexibility comes from connecting existing tools in useful ways.
   Fold environment should be able to call existing tools, such as executables,
