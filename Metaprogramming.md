@@ -67,7 +67,7 @@ In Fold it can be encoded as:
 syntax
   | `[ `] =
     `(List.empty)
-    
+
   | `[ (x <- expr) (xs <- (`, expr)*) =
     `(List.prepend x xs)
 ```
@@ -128,13 +128,13 @@ notation.
 A simple operation with an infix operator as:
 
 ```scala
-def x = 2 + 2
+val x = 2 + 2
 ```
 
 Is translated during parsing to:
 
 ```scala
-(= (def x) (2 + 2))
+(= (val x) (2 + 2))
 ```
 
 Here is the grammar of the canonical syntax:
