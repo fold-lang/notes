@@ -91,3 +91,4 @@ Mathematicas evaluation of unknown functions and values: f x. Symbolic applicati
 - Very flexible and elegant way of macro definition is implicit lifting of `Expr` functions during the compilation phase. This means that macros are not special, they are just regular functions from `Expr -> Expr`.
 - Explicit quoting of macro arguments is a first step for runtime staging.
 - **Syntax types**: expressions, patterns, types, *etc*. – are all different classes of syntax. Allow the user to create new classes by combining existing classes. For example, assignment, list, pair, *etc*. are possible classes. Inspiration from a paper about Honu.
+- `Option.assert :: Self a -> a` or `enforce`.

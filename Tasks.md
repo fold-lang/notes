@@ -12,11 +12,11 @@ f << g = x -> f (g x)
 
 
 ```
-sig Option
+interface Option
   _ ? _ :: Self a -> a -> a 
 end
 
-mod Option
+module Option
   _ ? _ :: Self a -> a -> a
   self ? default =
     case self

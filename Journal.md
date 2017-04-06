@@ -731,8 +731,8 @@ Referencing
 ## Nov 19 2016
 
 - Consider including symbol literals in the Fold’s lexer.
- 
- 
+
+
 ## Dec 3 2016
 
 - **Q**: What are the advantages and tradeoffs of having fully custom syntax as compared to infix, prefix and postfix definitions?
@@ -743,13 +743,13 @@ Referencing
     "if" test "then" a "else" b = …
 
     `if test `then a `else b = …
-    
-    
+
+
 
 
 **Operators**:
 
-    
+
     -- Option with default value.
     @infix 6
     _ ? _ :: Self a -> a -> a
@@ -758,14 +758,14 @@ Referencing
             Some x -> x
             None   -> default
         }
-    
+
     -- Monad signature
     sig Monad {
         type Self a
         pure :: a -> Self a
         _ >>= _ :: Self a -> (a -> Self b) -> Self b
     }
-    
+
     -- Conditional macro
     @macro
     if _ then _ else _ :: Code Bool -> Code a -> Code a -> Code a
@@ -778,11 +778,11 @@ Referencing
 
 Provide multiple rules with common prefix.
 
-    
+
     [ ]
     [ _ ]
     [ _ , rest... ]
-    
+
 
 ### Named Application
 
@@ -790,17 +790,17 @@ Fold uses a lightweight mechanism to translate complex syntactic structures to r
 
 	-- Regular function application.
 	f x => f x
-	
+
 	-- Function application with a named argument
 	f label: x => f label: x
-	
+
 	-- Function application with a named block argument
 	f label
 	  x
 	  y
 	end
 		=> f label: (x; y)
-		
+
 
 ## Dec 14 2016
 
@@ -902,3 +902,41 @@ hello : String -> ()
 hello name =
   print "Hello, $name!"
 ```
+
+
+## Mar 16 2017
+
+Function definition with clauses in Fold will be implemented. The only
+disadvantage is the small inconsistency in formatting. Consider the following
+example:
+
+```
+-- Without clauses
+def hello name =
+  print "hello, %s" name
+
+
+-- With clauses
+def hello "world" =
+    print "hello, WORLD!"
+  | hello name
+    print "hello, %s!" name
+```
+
+The indentation is inconsistent in two cases. But weighting all variables, clauses do add value to the language.
+
+
+### Pros
+
+- Similar to Haskell and StandardML
+- Easy to understand
+- Compact and clear code
+- Will be used in macros too.
+
+
+### Cons
+
+- Do not add expessivity to the language, equivalent to `case`
+- Do not use `end` termination
+- Inconsistent indentation
+

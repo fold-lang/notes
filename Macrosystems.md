@@ -1,3 +1,13 @@
+
+
+## Fold
+
+
+syntax if =
+  | ->
+
+
+
 ## Nim
 
 ### Infix Operators

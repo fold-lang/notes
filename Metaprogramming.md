@@ -44,11 +44,13 @@ and can be extended with macros.
 
 
 ```
-macro if t then: a else: b =
-  match t
-  | True -> a
-  | False -> b
+syntax `if t `then a `else b =
+  ```
+  match $t
+  | True -> $a
+  | False -> $b
   end
+  ```
 ```
 
 List literals are also defined with macros. Consider the following grammar
@@ -59,6 +61,17 @@ list  = "[" "]" | items
 items = expr | expr "," items
 ```
 
+In Fold it can be encoded as:
+
+```
+syntax
+  | `[ `] =
+    `(List.empty)
+    
+  | `[ (x <- expr) (xs <- (`, expr)*) =
+    `(List.prepend x xs)
+```
+
 The same grammar can be defined in the parser combinator style:
 
 ```
@@ -67,30 +80,6 @@ items = do
   x  <- expr
   xs <- many (char ',' >> expr)
   return [x & xs]
-```
-
-```
-list = "[" "]" | expr ("," expr)*
-
-macro
-  | "[" "]" -> List.empty
-  | "[" (x::Expr) (xs::("," Expr)*) "]" -> List.prepend x xs
-end
-
-macro vec
-  | $x::Expr "," * ->
-    let temp_vec = Vec::new() in
-    $(
-      temp_vec.push($x);
-    )*
-    temp_vec
-```
-
-```
-syntax
-  | `[ `] = List.empty
-  | `[ list_items `]
-fun list_items
 ```
 
 

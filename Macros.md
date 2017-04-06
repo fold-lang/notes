@@ -22,23 +22,23 @@ factorial n =
 ```
 module Option
   type Self a = Some a | None
-  
+
   def self ? default =
     match self
     | Some a -> a
     | None   -> default
     end
 
-  include Monad.Make(module
+  include Monad.Make module
     type Self = Option.Self
 
     def pure = Some
 
-    bind f self =
+    val bind f self =
       match self
       | Some a -> f a
       | None   -> None
       end
-  end)
+  end
 end
 ```
