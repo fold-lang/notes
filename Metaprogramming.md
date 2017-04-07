@@ -79,6 +79,7 @@ List.map f (List.map g l) -> List.map (f << g) l
 This rule will be matched during the compilation and a rewrite will be
 performed to compose the functions `f` and `g` and only produce one list.
 
+***
 
 ## Design
 
