@@ -1,7 +1,6 @@
 # Metaprogramming
 
-This document explores the metaprogramming mechanisms present in Fold and
-discusses their implementation details.
+This document explores the metaprogramming mechanisms present in Fold and discusses their implementation details.
 
 ## Approaches
 
@@ -36,51 +35,13 @@ and why?
   specialise code for different input types; add attributes to all functions in
   a module (_e.g._ for tracing).
 
+
 ### Language Extensions
 
 Fold is language implemented as a library. The compiler has a set of basic
-parsing rules (described in the section about [Canonical Syntax](#canonical-syntax))
-and can be extended with macros.
-
-
-```
-syntax `if t `then a `else b =
-  ```
-  match $t
-  | True -> $a
-  | False -> $b
-  end
-  ```
-```
-
-List literals are also defined with macros. Consider the following grammar
-definition:
-
-```
-list  = "[" "]" | items
-items = expr | expr "," items
-```
-
-In Fold it can be encoded as:
-
-```
-syntax
-  | `[ `] =
-    `(List.empty)
-
-  | `[ (x <- expr) (xs <- (`, expr)*) =
-    `(List.prepend x xs)
-```
-
-The same grammar can be defined in the parser combinator style:
-
-```
-list = char '[' >> char ']' <|> char '[' >> items >> char ']'
-items = do
-  x  <- expr
-  xs <- many (char ',' >> expr)
-  return [x & xs]
-```
+parsing rules (described in the section about [Canonical
+Syntax](#canonical-syntax)) and can be extended to include traditional
+programming elements or domain-specific languages.
 
 
 ### Rewrite Rules, Stream Fusion and Deforestation
@@ -98,6 +59,12 @@ new expression.
 
 Rewrite rules can be applied to macros and thus need to be evaluated before
 macro expansion.
+
+One example rewrite rules is simplification of compound operations:
+
+```elm
+
+```
 
 
 ## Design
@@ -127,13 +94,13 @@ notation.
 
 A simple operation with an infix operator as:
 
-```scala
+```elm
 val x = 2 + 2
 ```
 
 Is translated during parsing to:
 
-```scala
+```elm
 (= (val x) (2 + 2))
 ```
 
