@@ -60,11 +60,24 @@ new expression.
 Rewrite rules can be applied to macros and thus need to be evaluated before
 macro expansion.
 
-One example rewrite rules is simplification of compound operations:
+One example rewrite rules is compile-time simplification of compound
+operations:
 
 ```elm
-
+List.map (x -> Int.to_string x)
+  (List.map (x -> x + 10) [1, 2, 3, 4, 5])
 ```
+
+In this example two lists are allocated, although one is intermediate and not
+used. With rewrite rules it can be optimised by telling the compiler about the
+following equivalence between expressions:
+
+```elm
+List.map f (List.map g l) -> List.map (f << g) l
+```
+
+This rule will be matched during the compilation and a rewrite will be
+performed to compose the functions `f` and `g` and only produce one list.
 
 
 ## Design
